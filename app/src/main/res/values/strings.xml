@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Jicker_Project</string>
+    <string name="Create_new_account">Create New account</string>
+    <string name="user_name">Please enter your username</string>
+    <string name="password">Please enter your password</string>
+    <string name="password_second_time">Please enter your password again</string>
+    <string name="sign_up">Sign up</string>
+    <string name="fill_items">Please fill all the items!!</string>
+    <string name="login_page_button"><u>Login</u></string>
+
+    <string name="login_to_your_account">Login to your account</string>
+    <string name="login">Login</string>
+    <string name="login_back_button_symbol">⬅</string>
+    <string name="login_back_button">Back</string>
+</resources>
