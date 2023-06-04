@@ -25,8 +25,14 @@ class RegisterActivity : AppCompatActivity() {
         if (int == 1) {
             val diaName = EmptyInformationDialogError();
             diaName.show(supportFragmentManager, "test")
-        } else {
+        } else if (int == 2) {
             val diaName = PasswordMatchingDialogError();
+            diaName.show(supportFragmentManager, "test")
+        } else if ( int == 3) {
+            val diaName = PasswordLengthError();
+            diaName.show(supportFragmentManager, "test")
+        } else if ( int == 4) {
+            val diaName = PasswordLengthError();
             diaName.show(supportFragmentManager, "test")
         }
     }
@@ -59,6 +65,9 @@ class RegisterActivity : AppCompatActivity() {
                 openDialog(1)
             } else if (!passOneText.text.toString().equals(passTwoText.text.toString())) {
                 openDialog(2)
+            } else if (passOneText.text.toString().length <= 8) {
+                println("ddddddddddddd")
+                openDialog(3)
             } else {
                 println("here")
                 val json = """
