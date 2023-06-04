@@ -3,15 +3,14 @@ package com.example.jicker_project.fe
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.example.jicker_project.R
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
-import kotlin.math.log
 
 class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,18 +21,27 @@ class RegisterActivity : AppCompatActivity() {
 
 
     private fun openDialog(int: Int) {
-        if (int == 1) {
-            val diaName = EmptyInformationDialogError();
-            diaName.show(supportFragmentManager, "test")
-        } else if (int == 2) {
-            val diaName = PasswordMatchingDialogError();
-            diaName.show(supportFragmentManager, "test")
-        } else if ( int == 3) {
-            val diaName = PasswordLengthError();
-            diaName.show(supportFragmentManager, "test")
-        } else if ( int == 4) {
-            val diaName = UsernameLengthError();
-            diaName.show(supportFragmentManager, "test")
+        when (int) {
+            1 -> {
+                val diaName = EmptyInformationDialogError()
+                diaName.show(supportFragmentManager, "test")
+            }
+            2 -> {
+                val diaName = PasswordMatchingDialogError()
+                diaName.show(supportFragmentManager, "test")
+            }
+            3 -> {
+                val diaName = PasswordLengthError()
+                diaName.show(supportFragmentManager, "test")
+            }
+            4 -> {
+                val diaName = UsernameLengthError()
+                diaName.show(supportFragmentManager, "test")
+            }
+            5 -> {
+                val diaName = UniqueUsernameError()
+                diaName.show(supportFragmentManager, "test")
+            }
         }
     }
 
@@ -41,7 +49,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun post(url: String, json: String, callback: Callback) {
         val json1 = "application/json; charset=utf-8".toMediaTypeOrNull()
         val client = OkHttpClient()
-        val body = RequestBody.create(json1, json)
+        val body = json.toRequestBody(json1)
         val request = Request.Builder()
             .url(url)
             .post(body)
@@ -63,7 +71,7 @@ class RegisterActivity : AppCompatActivity() {
                 println("here")
                 println()
                 openDialog(1)
-            } else if (!passOneText.text.toString().equals(passTwoText.text.toString())) {
+            } else if (passOneText.text.toString() != passTwoText.text.toString()) {
                 openDialog(2)
             } else if (passOneText.text.toString().length <= 8) {
                 openDialog(3)
@@ -88,6 +96,7 @@ class RegisterActivity : AppCompatActivity() {
                         println("Response Code: ${response.code}")
                         if (!response.isSuccessful) {
                             println("Unexpected code $response")
+                            openDialog(5)
                         } else {
                             println("are we here or above?")
                             println(response.body?.string())
