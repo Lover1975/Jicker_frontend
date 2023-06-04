@@ -32,7 +32,7 @@ class RegisterActivity : AppCompatActivity() {
             val diaName = PasswordLengthError();
             diaName.show(supportFragmentManager, "test")
         } else if ( int == 4) {
-            val diaName = PasswordLengthError();
+            val diaName = UsernameLengthError();
             diaName.show(supportFragmentManager, "test")
         }
     }
@@ -66,8 +66,9 @@ class RegisterActivity : AppCompatActivity() {
             } else if (!passOneText.text.toString().equals(passTwoText.text.toString())) {
                 openDialog(2)
             } else if (passOneText.text.toString().length <= 8) {
-                println("ddddddddddddd")
                 openDialog(3)
+            } else if (usernameText.text.toString().length <= 4 || usernameText.text.toString().length >= 49) {
+                openDialog(4)
             } else {
                 println("here")
                 val json = """
