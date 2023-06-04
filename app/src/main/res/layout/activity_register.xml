@@ -49,7 +49,7 @@
             android:layout_margin="20dp"
             android:autofillHints=""
             android:hint="@string/password"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
             android:maxLines="1"
             android:minHeight="48dp"
             android:padding="5dp" />
